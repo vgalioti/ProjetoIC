@@ -28,6 +28,8 @@ def read_stl(filename):
     #normals = data['Normals']
     return data
 
+
+
 def checkVertices(vertexGroup, particleGroup):
     
     for i in range (len(vertexGroup)):
@@ -40,6 +42,7 @@ def checkVertices(vertexGroup, particleGroup):
                 particleGroup.addParticle = vertexParticle
                 
                 break
+
 
 
 def groupFaces(data):
@@ -61,7 +64,7 @@ def groupFaces(data):
         for x in range(3):
             vertexGroup.append(particleGroup[i].faces[0].points[x])
     
-    # Clean clones
+    # Para limpar as particles inativas
     i = 0
     while i < len(particleGroup):
         
@@ -71,8 +74,8 @@ def groupFaces(data):
         
         i = i + 1
     
-    
     return particleGroup
+    
     
 
 if __name__ == "__main__":
