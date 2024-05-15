@@ -3,7 +3,7 @@ from copy import deepcopy as cp
 
 class Particle:
     def __init__(self, f):
-        self.__isActive = True;
+        self.__isActive = True
         
         # Altera o id das particulas
         face1 = f
@@ -40,16 +40,15 @@ class Particle:
         
 
     @faces.setter
-    #OBS: A particle original p1 passa a ter um particleId
-    # DIFERENTE DO SEU PROPRIO!
+    #OBS: A particle original p1 passa a ter um particleId DIFERENTE DO SEU PROPRIO!
     def addParticle(self, p1):
         for i in range(len(p1.faces)):
             self.addFace = p1.faces[i]
             
-        p1.isActive = False;
+        p1.isActive = False
 
 
     @isActive.setter
     def isActive(self, state):
-        self.__isActive = state;
+        self.__isActive = state
     
