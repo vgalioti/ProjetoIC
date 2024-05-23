@@ -45,8 +45,36 @@ def test3():
     teste.pop(0)
     
     print(teste)
+    
+def test4():
+    teste = {0.756, 0.72545, 0.73514}
+    print(teste)
+    print("")
+    
+    teste.add(0.124)
+    teste.add(0.125)
+    print(teste)
+    
+    a = 0.756
+    
+    if a in teste:
+        print("Halleluya!")
+        
+def test5():
+    teste = {0.756, 0.72545, 0.73514}
+    t1 = (0.567, 0.432, 0.555)
+    
+    teste.add(t1)
+    
+    print(teste)
+    
+    if (0.555, 0.432, 0.567) in teste:
+        print("Halleluya!")
+        
+    for x in teste:
+        print(x)
 
 if __name__ == "__main__":
-    test3()
+    test5()
     
     

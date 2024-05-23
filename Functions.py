@@ -30,26 +30,31 @@ def read_stl(filename):
 
 
 
-def checkVertices(vertexGroup, particleGroup):
+def checkVertices(particleGroup):
+    lastAdd = particleGroup[-1]
     
-    for i in range (len(vertexGroup)):
-        for j in range(3):
-            if (vertexGroup[i].coord == particleGroup.faces[0].points[j].coord).all() and \
-                vertexGroup[i].particleId != id(particleGroup):
-
-                holdId = vertexGroup[i].particleId
-                vertexParticle = ctypes.cast(holdId, ctypes.py_object).value
-                particleGroup.addParticle = vertexParticle
+    for i in range(len(particleGroup) - 1):
+        for x in lastAdd.vertices:
+            if (particleGroup[i].isActive == True) and (x in particleGroup[i].vertices):
                 
+                lastAdd.addParticle = particleGroup[i]
                 break
+            
+    # Para limpar as particles inativas
+    j = 0
+    while j < len(particleGroup):
+        
+        if particleGroup[j].isActive == False:
+            particleGroup.pop(j)
+            j = j - 1
+        
+        j = j + 1
 
 
 
 def groupFaces(data):
     sizeData = len(data['Vertex1'])
     particleGroup = []
-    vertexGroup = []
-    
     
     for i in range(sizeData):
 
@@ -59,10 +64,7 @@ def groupFaces(data):
         f1 = Face(data['Normals'][i], p1, p2, p3)
     
         particleGroup.append(Particle(f1))
-        checkVertices(vertexGroup, particleGroup[i])
-        
-        for x in range(3):
-            vertexGroup.append(particleGroup[i].faces[0].points[x])
+        checkVertices(particleGroup)
     
     # Para limpar as particles inativas
     i = 0
@@ -80,7 +82,7 @@ def groupFaces(data):
 
 if __name__ == "__main__":
     start_time = datetime.now()
-    data = read_stl("C:/Users/vinic/OneDrive/Área de Trabalho/DoisCuboTeste.stl")
+    data = read_stl("C:/Users/vinic/OneDrive/Área de Trabalho/Particle_Bed.stl")
     print("##########")
     print("OBJETIVO:")
     print(len(data['Vertex1']))
