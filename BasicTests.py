@@ -74,7 +74,15 @@ def test5():
     for x in teste:
         print(x)
 
+def test6():
+    teste = [1, 2, 3]
+    print(teste)
+    print("")
+    
+    teste.append(4)
+    print(teste)
+
 if __name__ == "__main__":
-    test5()
+    test6()
     
     

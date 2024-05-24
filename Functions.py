@@ -4,7 +4,6 @@ from ParticleClass import Particle
 
 import numpy as np
 import struct
-import ctypes
 from datetime import datetime
 
 
@@ -32,23 +31,23 @@ def read_stl(filename):
 
 def checkVertices(particleGroup):
     lastAdd = particleGroup[-1]
+    deleted = []
     
     for i in range(len(particleGroup) - 1):
         for x in lastAdd.vertices:
             if (particleGroup[i].isActive == True) and (x in particleGroup[i].vertices):
-                
+    
                 lastAdd.addParticle = particleGroup[i]
+                deleted.append(i)
+                
                 break
             
     # Para limpar as particles inativas
     j = 0
-    while j < len(particleGroup):
-        
-        if particleGroup[j].isActive == False:
-            particleGroup.pop(j)
-            j = j - 1
-        
-        j = j + 1
+    for k in range(len(deleted)):
+        index = deleted[k] + j
+        particleGroup.pop(index)
+        j = j - 1
 
 
 
@@ -65,16 +64,6 @@ def groupFaces(data):
     
         particleGroup.append(Particle(f1))
         checkVertices(particleGroup)
-    
-    # Para limpar as particles inativas
-    i = 0
-    while i < len(particleGroup):
-        
-        if particleGroup[i].isActive == False:
-            particleGroup.pop(i)
-            i = i - 1
-        
-        i = i + 1
     
     return particleGroup
     
