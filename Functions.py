@@ -59,16 +59,13 @@ def checkVertices(particleGroup):
     deleted = []
     
     for i in range(len(particleGroup) - 1):
-        for x in lastAdd.vertices:
-            if (particleGroup[i].isActive == True) and (x in particleGroup[i].vertices):
+        if lastAdd.vertices & particleGroup[i].vertices:
     
-                lastAdd.addParticle = particleGroup[i]
-                deleted.append(i)
-                
-                break
-            
-    # Para limpar as particles inativas
+            lastAdd.addParticle = particleGroup[i]
+            deleted.append(i)
+                   
     j = 0
+    # Para limpar as particles inativas
     for k in range(len(deleted)):
         index = deleted[k] + j
         particleGroup.pop(index)
@@ -96,8 +93,9 @@ def groupFaces(data):
 
 if __name__ == "__main__":
     start_time = datetime.now()
-    data = read_stl("C:/Users/vinic/OneDrive/Área de Trabalho/DoisCuboTeste.stl")
-    print(data['Normals'])
+    
+    data = read_stl("C:/Users/vinic/OneDrive/Área de Trabalho/Particle_Bed.stl")
+    
     print("##########")
     print("OBJETIVO:")
     print(len(data['Vertex1']))
@@ -109,4 +107,5 @@ if __name__ == "__main__":
     print("NÚMERO DE PARTICLES:")
     print(len(teste))
     print("")
+    
     print('Duration: {}'.format(datetime.now() - start_time))
