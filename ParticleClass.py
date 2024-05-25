@@ -3,19 +3,18 @@ from copy import deepcopy as cp
 
 class Particle:
     def __init__(self, f):
-        self.__isActive = True
-        
-        # Altera o id das particulas
         face1 = f
         for i in range(3):
+            # Altera o ID das particulas
             face1.points[i].particleId = id(self)
-
-        self.__faces = np.stack([face1])
 
         t1 = tuple(face1.points[0].coord)
         t2 = tuple(face1.points[1].coord)
         t3 = tuple(face1.points[2].coord)
+        
         self.__vertices = {t1, t2, t3}
+        self.__faces = np.stack([face1])
+        self.__isActive = True
         
 
     @property

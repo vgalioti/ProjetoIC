@@ -29,6 +29,31 @@ def read_stl(filename):
 
 
 
+def exportSTL(particleList):
+    f = open("export.stl", "w")
+    f.write("solid TesteSolid\n")
+    
+    for x in particleList:
+        for i in range(len(x.faces)):
+            a = "facet normal " + str(x.faces[i].normal[0]) + \
+                            " " + str(x.faces[i].normal[1]) + \
+                            " " + str(x.faces[i].normal[2]) + "\n"
+            f.write(a)
+            f.write("  outer loop\n")
+
+            for k in range(3):
+                b = "    vertex " + str(x.faces[i].points[k].coord[0]) + \
+                              " " + str(x.faces[i].points[k].coord[1]) + \
+                              " " + str(x.faces[i].points[k].coord[2]) + "\n"
+                f.write(b)
+            
+            f.write("  endloop\n")
+            f.write("endfacet\n")
+
+    f.write("endsolid TesteSolid")
+            
+
+
 def checkVertices(particleGroup):
     lastAdd = particleGroup[-1]
     deleted = []
@@ -66,12 +91,13 @@ def groupFaces(data):
         checkVertices(particleGroup)
     
     return particleGroup
-    
-    
+
+
 
 if __name__ == "__main__":
     start_time = datetime.now()
-    data = read_stl("C:/Users/vinic/OneDrive/Área de Trabalho/Particle_Bed.stl")
+    data = read_stl("C:/Users/vinic/OneDrive/Área de Trabalho/DoisCuboTeste.stl")
+    print(data['Normals'])
     print("##########")
     print("OBJETIVO:")
     print(len(data['Vertex1']))
