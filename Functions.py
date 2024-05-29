@@ -94,10 +94,10 @@ def groupFaces(data):
 if __name__ == "__main__":
     start_time = datetime.now()
     
-    data = read_stl("C:/Users/vinic/OneDrive/Área de Trabalho/Particle_Bed.stl")
+    data = read_stl("C:/Users/vinic/OneDrive/Área de Trabalho/STL Testes/Particle_Bed.stl")
     
     print("##########")
-    print("OBJETIVO:")
+    print("Número de Faces:")
     print(len(data['Vertex1']))
     print("##########")
     print("")
