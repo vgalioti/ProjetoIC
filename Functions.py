@@ -96,16 +96,20 @@ if __name__ == "__main__":
     
     data = read_stl("C:/Users/vinic/OneDrive/Área de Trabalho/STL Testes/Particle_Bed.stl")
     
-    print("##########")
     print("Número de Faces:")
     print(len(data['Vertex1']))
-    print("##########")
     print("")
     
-    teste = groupFaces(data)
+    particles = groupFaces(data)
 
-    print("NÚMERO DE PARTICLES:")
-    print(len(teste))
+    print("Número de Particles:")
+    print(len(particles))
     print("")
     
     print('Duration: {}'.format(datetime.now() - start_time))
+    print("")
+    
+    box_center = (0, 0, 0)        # Coordenadas XYZ
+    box_length = 1                # Eixo X
+    box_width = 1                 # Eixo Y
+    box_height = 1                # Eixo Z

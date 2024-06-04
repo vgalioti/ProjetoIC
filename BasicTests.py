@@ -81,8 +81,21 @@ def test6():
     
     teste.append(4)
     print(teste)
+    
+def test7():
+    from BoxClass import Box
+    
+    box_center = (1, 2, 3)        # Coordenadas XYZ
+    box_length = 4                # Eixo X
+    box_width = 5                 # Eixo Y
+    box_height = 10               # Eixo Z
+    
+    teste = Box(box_center, box_length, box_width, box_height)
+    
+    print(teste.faces(2))
+    
 
 if __name__ == "__main__":
-    test6()
+    test7()
     
     
