@@ -1,8 +1,10 @@
 from FaceClass import Face
 from PointClass import Point
 from ParticleClass import Particle
+from BoxClass import Box
 
 import numpy as np
+from math import sqrt
 import struct
 from datetime import datetime
 
@@ -91,6 +93,18 @@ def groupFaces(data):
 
 
 
+def checkMaxMin(particles):
+    minimum = set()
+    maximum = set()
+    
+    for x in particles:
+        minimum.add(min(x.vertices))
+        maximum.add(max(x.vertices, key = lambda x: x[0] + x[1] + x[2]))
+    
+    # Por enquanto é uma aproximacao. Precisa melhorar
+    return [min(minimum, key = lambda x: x[0] + x[1] + x[2]), max(maximum, key = lambda x: x[0] + x[1] + x[2])]
+
+
 if __name__ == "__main__":
     start_time = datetime.now()
     
@@ -106,10 +120,21 @@ if __name__ == "__main__":
     print(len(particles))
     print("")
     
+    coords = checkMaxMin(particles)
+    
+    print("Máximo e Mínimo:")
+    print(f"{coords[1]} e {coords[0]} \n")
+    
     print('Duration: {}'.format(datetime.now() - start_time))
     print("")
     
     box_center = (0, 0, 0)        # Coordenadas XYZ
     box_length = 1                # Eixo X
     box_width = 1                 # Eixo Y
-    box_height = 1                # Eixo Z
+    box_height = 0.1                # Eixo Z
+
+    teste = Box(box_center, box_length, box_width, box_height)
+    
+    test1 = teste.checkParticles(particles)
+    exportSTL(test1)
+    

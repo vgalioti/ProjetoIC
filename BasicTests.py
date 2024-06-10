@@ -91,11 +91,20 @@ def test7():
     box_height = 10               # Eixo Z
     
     teste = Box(box_center, box_length, box_width, box_height)
-    
+    print(box_center[1])
     print(teste.faces(2))
+    
+def test8():
+    teste = {(1, 2, 5), (1, 2, 4), (9, 2, 5), (3, 5, 8)}
+    t = min(teste)
+    print(t)
+    
+    t1 = (-1, 2, 3)
+    if all(z >= 0 for z in t1):
+        print("Hi")
     
 
 if __name__ == "__main__":
-    test7()
+    test8()
     
     

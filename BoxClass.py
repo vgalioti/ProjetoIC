@@ -1,3 +1,5 @@
+from ParticleClass import Particle
+
 class Box:
     def __init__(self, center, length, width, height):
         self.__center = center
@@ -9,6 +11,13 @@ class Box:
         x = length / 2.0
         y = width / 2.0
         z = height / 2.0
+        
+        self.__Zmax = z1 + z
+        self.__Zmin = z1 - z
+        self.__Xmax = x1 + x
+        self.__Xmin = x1 - x
+        self.__Ymax = y1 + y
+        self.__Ymin = y1 - y
         
         self.__faceXY1 = {(x1 + x, y1 + y, z1 - z), (x1 + x, y1 - y, z1 - z), 
                           (x1 - x, y1 + y, z1 - z), (x1 - x, y1 - y, z1 - z)}
@@ -24,7 +33,6 @@ class Box:
                           (x1 + x, y1 - y, z1 + z), (x1 + x, y1 - y, z1 - z)}
 
 
-
     def faces(self, n):
         if n == 1:
             return self.__faceXY1
@@ -38,3 +46,26 @@ class Box:
             return self.__faceZY1
         elif n == 6:
             return self.__faceZY2
+
+ 
+    def checkParticles(self, particles):
+        result = []
+        check1 = False
+        check2 = False
+        
+        for x in particles:
+            for y in x.vertices:
+
+                if y[2] > self.__Zmax:
+                    check1 = True
+                elif y[2] < self.__Zmax:
+                    check2 = True
+                    
+                if (check1 == True) and (check2 == True):
+                    result.append(x)
+                    break
+                
+            check1 = False
+            check2 = False
+    
+        return result
