@@ -18,6 +18,8 @@ class Box:
         self.__Xmin = x1 - x
         self.__Ymax = y1 + y
         self.__Ymin = y1 - y
+        self.__Max = (self.__Xmax, self.__Ymax, self.__Zmax)
+        self.__Min = (self.__Xmin, self.__Ymin, self.__Zmin)
         
         self.__faceXY1 = {(x1 + x, y1 + y, z1 - z), (x1 + x, y1 - y, z1 - z), 
                           (x1 - x, y1 + y, z1 - z), (x1 - x, y1 - y, z1 - z)}
@@ -47,7 +49,7 @@ class Box:
         elif n == 6:
             return self.__faceZY2
 
- 
+    # Nao pega particulas que colidem, mas nao tem vertices dentro
     def checkParticles(self, particles):
         result = []
         check1 = False
@@ -55,10 +57,13 @@ class Box:
         
         for x in particles:
             for y in x.vertices:
-
-                if y[2] > self.__Zmax:
+                
+                # Verifica se tem pelo menos 1 vertice para fora
+                if any(a > b for a, b in zip(y, self.__Max)) or any(a < b for a, b in zip(y, self.__Min)):
                     check1 = True
-                elif y[2] < self.__Zmax:
+                
+                # verifica se tem pelo menos 1 vertice para dentro
+                elif all(a <= v <= b for a, v, b in zip(self.__Min, y, self.__Max)):
                     check2 = True
                     
                 if (check1 == True) and (check2 == True):

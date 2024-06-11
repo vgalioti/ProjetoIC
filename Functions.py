@@ -129,8 +129,8 @@ if __name__ == "__main__":
     print("")
     
     box_center = (0, 0, 0)        # Coordenadas XYZ
-    box_length = 1                # Eixo X
-    box_width = 1                 # Eixo Y
+    box_length = 0.1                # Eixo X
+    box_width = 0.4                 # Eixo Y
     box_height = 0.1                # Eixo Z
 
     teste = Box(box_center, box_length, box_width, box_height)

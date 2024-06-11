@@ -102,6 +102,13 @@ def test8():
     t1 = (-1, 2, 3)
     if all(z >= 0 for z in t1):
         print("Hi")
+        
+    x = 0
+    if 1 < x < 7:
+        print("teste")
+        
+    if (1, 2, 3) < (5, 5, 2):
+        print("2")
     
 
 if __name__ == "__main__":
